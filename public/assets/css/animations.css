@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════════════════════
+   FONTAINE GROUP HOLDING — animations.css
+   Fichier créé : était référencé mais absent du projet
+═══════════════════════════════════════════════════════ */
+
+/* ── Entrées génériques ── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Modals ── */
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.93) translateY(16px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+/* ── Mega menu ── */
+@keyframes megaSlideDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Search overlay ── */
+@keyframes searchExpand {
+    from { opacity: 0; transform: scaleY(0.96); }
+    to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* ── Ticker header ── */
+@keyframes hticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ── FAB WhatsApp ── */
+@keyframes fabPop {
+    0%   { opacity: 0; transform: scale(0) rotate(-15deg); }
+    70%  { transform: scale(1.12) rotate(4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes waPulse {
+    0%   { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 0;   transform: scale(1.6); }
+}
+
+/* ── View counter badge ── */
+@keyframes vcBadgePop {
+    0%   { opacity: 0; transform: translateY(8px) scale(0.9); }
+    70%  { transform: translateY(-2px) scale(1.04); }
+    100% { opacity: 1; transform: translateY(0)  scale(1); }
+}
+
+/* ── Counter number flip ── */
+@keyframes vcCountUp {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utilitaires d'animation ── */
+.animate-fade-up   { animation: fadeUp   0.8s ease forwards; }
+.animate-fade-in   { animation: fadeIn   0.5s ease forwards; }
+.animate-scale-in  { animation: scaleIn  0.4s ease forwards; }
+
+/* Délais enchaînés pour stagger */
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.2s; }
+.anim-delay-3 { animation-delay: 0.35s; }
+.anim-delay-4 { animation-delay: 0.5s; }
+.anim-delay-5 { animation-delay: 0.65s; }
+
+/* Respect des préférences système */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

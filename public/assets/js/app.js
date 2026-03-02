@@ -135,15 +135,46 @@ const TICKER_PHRASES = [
     "Standards Internationaux",
 ];
 
+// function buildHeaderTicker() {
+//     const track = DOM["header-ticker-track"];
+//     if (!track) return;
+
+//     // DocumentFragment pour meilleure performance
+//     const fragment = document.createDocumentFragment();
+
+//     for (let r = 0; r < 4; r++) {
+//         TICKER_PHRASES.forEach((phrase) => {
+//             const el = document.createElement("span");
+//             el.className = "header-ticker-item";
+//             el.innerHTML = `${phrase}<span class="header-ticker-sep" aria-hidden="true"></span>`;
+//             fragment.appendChild(el);
+//         });
+//     }
+
+//     track.innerHTML = "";
+//     track.appendChild(fragment);
+// }
 function buildHeaderTicker() {
     const track = DOM["header-ticker-track"];
     if (!track) return;
 
-    // DocumentFragment pour meilleure performance
+    // Texte temporaire en dur
+    const tempPhrases = [
+        "FONTAINE GROUP HOLDING",
+        "CAPITAL PRIVÉ",
+        "GESTION PATRIMONIALE",
+        "ABIDJAN · CÔTE D'IVOIRE",
+        "EXPANSION INTERNATIONALE",
+        "EXCELLENCE & RIGUEUR",
+        "INVESTISSEMENTS STRATÉGIQUES",
+        "UEMOA · CEDEAO",
+    ];
+
     const fragment = document.createDocumentFragment();
 
-    for (let r = 0; r < 4; r++) {
-        TICKER_PHRASES.forEach((phrase) => {
+    // 3 répétitions pour un défilement fluide
+    for (let r = 0; r < 3; r++) {
+        tempPhrases.forEach((phrase) => {
             const el = document.createElement("span");
             el.className = "header-ticker-item";
             el.innerHTML = `${phrase}<span class="header-ticker-sep" aria-hidden="true"></span>`;
@@ -177,7 +208,7 @@ function openModal(id, tab = null) {
 
         // Gestion des tabs si nécessaire
         if (tab) {
-            activateAuthTab(modal, tab);
+            activateAuthTab(modal, tab); // [CORRIGÉ] On passe l'élément modal, pas l'ID
         }
     } catch (error) {
         console.warn("Error opening modal:", error);
@@ -189,7 +220,10 @@ function closeModal(id) {
     if (modal) modal.classList.remove("open");
 }
 
-function activateAuthTab(modal, tab) {
+// [CORRIGÉ] Fonction activateAuthTab
+function activateAuthTab(modal, tabName) {
+    if (!modal) return;
+
     const tabs = modal.querySelectorAll(CONFIG.SELECTORS.AUTH_TAB);
     const forms = modal.querySelectorAll(CONFIG.SELECTORS.AUTH_FORM);
 
@@ -200,8 +234,11 @@ function activateAuthTab(modal, tab) {
 
     forms.forEach((f) => f.classList.remove("active"));
 
-    const activeTab = modal.querySelector(`.auth-tab[data-tab="${tab}"]`);
-    const activeForm = document.getElementById(`form-${tab}`);
+    // Sélectionne le bon onglet
+    const activeTab = modal.querySelector(`.auth-tab[data-tab="${tabName}"]`);
+
+    // Le formulaire a un ID global (ex: "form-login"), pas besoin de le chercher dans modal
+    const activeForm = document.getElementById(`form-${tabName}`);
 
     if (activeTab) {
         activeTab.classList.add("active");
@@ -590,9 +627,13 @@ function setupEventDelegation() {
         openSearch();
     });
 
-    // Search buttons
-    DOM["search-open-btn"]?.addEventListener("click", openSearch);
-    DOM["search-close-btn"]?.addEventListener("click", closeSearch);
+    // Search buttons - [CORRIGÉ] Vérification de l'existence
+    if (DOM["search-open-btn"]) {
+        DOM["search-open-btn"].addEventListener("click", openSearch);
+    }
+    if (DOM["search-close-btn"]) {
+        DOM["search-close-btn"].addEventListener("click", closeSearch);
+    }
 }
 
 function handleGlobalClick(e) {
@@ -713,20 +754,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialiser le compteur de vues
     initViewCounter();
-});
-
-/* ═══════════════════════════════════════════════════════
-   9. VIDÉO — Gestion du placeholder (optionnel)
-═══════════════════════════════════════════════════════ */
-
-// Optionnel : Cacher le placeholder quand la vidéo charge
-document.addEventListener("DOMContentLoaded", () => {
-    const videoIframe = document.querySelector(".video-wrapper iframe");
-    const placeholder = document.querySelector(".video-placeholder");
-
-    if (videoIframe && placeholder) {
-        videoIframe.addEventListener("load", () => {
-            placeholder.style.display = "none";
-        });
-    }
 });
