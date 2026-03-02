@@ -1,34 +1,8 @@
 <header id="site-header">
-
-    {{-- ── Colonne 1 : Logo + Ticker ── --}}
-    <div class="header-left">
-
-        {{-- [FIX] ticker HORS du <a> — structure valide --}}
-        <!-- <a class="logo-wrap"
-            href="{{ url('/') }}"
-            aria-label="Fontaine Group Holding — Accueil">
-            <img class="logo-img"
-                src="{{ asset('assets/images/logo_fontaine_group.jpeg') }}"
-                alt="Fontaine Group Holding"
-                loading="eager"
-                fetchpriority="high" />
-            <span class="logo-tagline">Côte d'Ivoire</span>
-        </a> -->
-
-        <div class="logo-sep" aria-hidden="true"></div>
-
-        <div class="header-ticker" aria-hidden="true">
-            <div class="header-ticker-track" id="header-ticker-track">
-                {{-- Rempli dynamiquement par app.js → buildHeaderTicker() --}}
-            </div>
-        </div>
-
-    </div>
-
     {{-- ── Colonne 2 : Boutons action ── --}}
     <div class="header-right">
 
-        <bnatutton class="btn-info-header"
+        <button class="btn-info-header"
             id="btn-info"
             aria-haspopup="dialog"
             aria-controls="modal-info">
@@ -38,8 +12,7 @@
         <button class="theme-toggle"
             id="theme-toggle"
             aria-label="Changer de thème">
-            {{-- [FIX] En dark  → affiche soleil (basculer vers light) --}}
-            {{-- [FIX] En light → affiche lune  (basculer vers dark)  --}}
+
             <svg class="icon-sun"
                 viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2"
@@ -75,6 +48,21 @@
         </button>
 
     </div>
+    {{-- ── Colonne 1 : Logo + Ticker ── --}}
+    <div class="header-left">
+
+
+        <div class="logo-sep" aria-hidden="true"></div>
+
+        <div class="header-ticker" aria-hidden="true">
+            <div class="header-ticker-track" id="header-ticker-track">
+                {{-- Rempli dynamiquement par app.js → buildHeaderTicker() --}}
+            </div>
+        </div>
+
+    </div>
+
+
 
 </header>
 

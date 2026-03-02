@@ -58,7 +58,7 @@
 {{-- ══════════════════════════════════════════════
      STATS BAR — [FIX] section manquante ajoutée
 ══════════════════════════════════════════════ --}}
-<div class="stats-bar" role="list" aria-label="Chiffres clés">
+<!-- <div class="stats-bar" role="list" aria-label="Chiffres clés">
   <div class="stat-item" role="listitem">
     <div class="stat-num">20+</div>
     <div class="stat-label">Années d'expertise</div>
@@ -75,7 +75,7 @@
     <div class="stat-num">340+</div>
     <div class="stat-label">Clients partenaires</div>
   </div>
-</div>
+</div> -->
 
 {{-- ══════════════════════════════════════════════
      CTA

@@ -1,19 +1,3 @@
-/* ═══════════════════════════════════════════════════════
-   FONTAINE GROUP HOLDING — style.css  v3.0
-   ───────────────────────────────────────────────────────
-   CORRECTIONS v3.0 :
-   · [FIX] --gold restauré aux vraies couleurs or du logo
-   · [FIX] .video-wrapper dupliqué → définition unique
-   · [FIX] .logo-img width:100% → width:auto
-   · [FIX] #static-nav sans adaptation light mode → ajouté
-   · [FIX] .video-container absent du CSS → ajouté
-   · [FIX] .footer-location absent → ajouté
-   · [FIX] .about-sub p margin non réinitialisé → corrigé
-   · [FIX] @import animations.css retiré (chargé via base.blade)
-   · [FIX] .static-nav-spacer absent → ajouté
-   · [FIX] .service-name/.site-name unifiées → .service-name
-═══════════════════════════════════════════════════════ */
-
 /* ── DESIGN TOKENS ── */
 :root {
     /* ── Fonds (dark mode — défaut) ── */
@@ -49,8 +33,8 @@
     --danger: #e04848;
 
     /* ── Layout ── */
-    --header-h: 68px;
-    --nav-h: 52px;
+    --header-h: 40px;
+    --nav-h: 80px;
     --radius: 3px;
     --radius-lg: 8px;
 
@@ -159,7 +143,7 @@ a:hover {
 ═══════════════════════════════════════ */
 #site-header {
     display: grid;
-    /* [FIX] Colonnes logiques : boutons (petit) | logo+ticker (grand) */
+
     grid-template-columns: auto 1fr;
     align-items: center;
     position: sticky;
@@ -167,9 +151,10 @@ a:hover {
     z-index: 1000;
     height: var(--header-h);
     background: var(--bg-glass);
-    border-bottom: 1px solid var(--gold-border);
+    border-bottom: 1px solid #167cad;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+
     gap: 0;
 }
 
@@ -180,7 +165,7 @@ a:hover {
     gap: 0.5rem;
     padding: 0 1.2rem;
     height: 100%;
-    border-right: 1px solid var(--gold-border);
+    border-right: 1px solid #1a99d6;
     flex-shrink: 0;
 }
 
@@ -203,14 +188,11 @@ a:hover {
     flex-shrink: 0;
 }
 
-/* [FIX] width: 100% → width: auto (empêchait déformation) */
 .logo-img {
-    height: 52px;
+    height: 80px;
     width: auto;
-    object-fit: contain;
-    display: block;
+    min-width: 100px;
 }
-
 .logo-tagline {
     font-size: 0.44rem;
     letter-spacing: 0.35em;
@@ -269,9 +251,11 @@ a:hover {
 }
 
 .header-ticker-item {
+    font-size: 16px;
     display: inline-flex;
     align-items: center;
     padding: 0 0.2rem;
+    color: #1a99d6;
 }
 
 .header-ticker-sep {
@@ -295,8 +279,8 @@ a:hover {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     border: 1px solid var(--gold-border);
-    background: var(--gold-dim);
-    color: var(--gold);
+    background: #1a99d6;
+    color: #fff;
     cursor: pointer;
     transition:
         background 0.25s,
@@ -311,9 +295,9 @@ a:hover {
 
 .btn-info-header:hover,
 .theme-toggle:hover {
-    background: var(--gold-dim);
-    border-color: var(--gold);
-    color: var(--gold-light);
+    background: #fff;
+    border-color: #1a99d6;
+    color: #1a99d6;
 }
 
 .theme-toggle {
@@ -395,15 +379,16 @@ a:hover {
 
 /* [FIX] Ajout adapation explicite light mode */
 [data-theme="light"] #static-nav {
-    background: rgba(240, 236, 228, 0.97);
+    background: rgba(203, 220, 247, 0.97);
 }
 
 .static-nav-logo {
     display: flex;
     align-items: center;
-    padding: 0 1.8rem;
-    border-right: 1px solid var(--gold-border);
+    margin-left: 5px;
+    border-right: 1px solid #fff;
     height: 100%;
+    width: 100%;
 }
 
 .static-nav-center {
@@ -422,7 +407,7 @@ a:hover {
 .nav-menu-item {
     padding: 0 1.8rem;
     height: var(--nav-h);
-    font-size: 0.62rem;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -446,15 +431,15 @@ a:hover {
     left: 50%;
     right: 50%;
     height: 2px;
-    background: var(--gold);
+    background: #fff;
     transition:
         left 0.25s,
         right 0.25s;
 }
 
 .nav-menu-item:hover {
-    color: var(--gold);
-    background: var(--gold-dim);
+    color: #fff;
+    background: #fff8e10d;
 }
 .nav-menu-item:hover::after {
     left: 0;
@@ -782,6 +767,7 @@ a:hover {
     position: relative;
     width: 100%;
     background: #000;
+    padding: 4rem 2rem 5rem;
 }
 
 /* [FIX] .video-container absent du CSS → ajouté */
@@ -1013,8 +999,6 @@ a:hover {
     margin-bottom: 0.8rem;
 }
 
-/* [FIX] <a href="#"> avec data-modal → stop propagation via JS
-   On retire le saut de page avec scroll-margin */
 .footer-links a {
     font-size: 0.82rem;
     color: var(--text-muted);
@@ -1639,6 +1623,7 @@ a:hover {
 /* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
+
 @media (min-width: 1600px) {
     .about-title {
         font-size: 4rem;
@@ -1660,7 +1645,17 @@ a:hover {
     }
 
     #site-header {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto; 
+    }
+    .header-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 0.9rem;
+        border-left: 1px solid var(--gold-border);
+    }
+    .header-left{
+        display: none;
     }
 
     .header-ticker {
@@ -1678,6 +1673,30 @@ a:hover {
     }
     .search-kbd-hint {
         display: none;
+    }
+}
+
+/* ─ À 640px la barre de recherche disparaît :
+   on revient à 2 colonnes Logo | Contrôles   */
+@media (max-width: 640px) {
+    .header-center {
+        display: none;
+    }
+    #site-header {
+        grid-template-columns: auto 1fr;
+    }
+    /* header-right occupe la 2e colonne → reste calé à droite */
+    .header-right {
+        justify-content: flex-end;
+    }
+
+    #view-counter {
+        bottom: 5.8rem;
+        right: 1.2rem;
+    }
+    .whatsapp-fab {
+        bottom: 1.5rem;
+        right: 1.2rem;
     }
 }
 
@@ -1714,17 +1733,6 @@ a:hover {
         gap: 0.8rem;
         text-align: center;
         align-items: center;
-    }
-}
-
-@media (max-width: 640px) {
-    #view-counter {
-        bottom: 5.8rem;
-        right: 1.2rem;
-    }
-    .whatsapp-fab {
-        bottom: 1.5rem;
-        right: 1.2rem;
     }
 }
 
